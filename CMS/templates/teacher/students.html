@@ -1,0 +1,75 @@
+{% extends "teacher/base.html" %}
+{% load static %}
+{% block title %}
+Attendance
+{% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <div class="card shadow">
+
+        {% if messages %}
+            {% for message in messages  %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    
+                    <div class="alert alert-success" role="alert">
+                         Student Added Successfully 
+                    </div>
+
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="alert alert-danger" role="alert">
+                             Password dosent match
+                    </div>
+                {% else %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+        {% endif %}
+
+
+
+
+        <div class="card-header py-3">
+            <p class="text-primary m-0 font-weight-bold"><strong>Attendence List&nbsp;</strong><i class="fa fa-list-alt" style="padding: 5px;"></i><br></p>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Student's List</th>
+                            <th>Attendance List</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                    <tfoot> 
+                    {% for Student_obj in Student_obj %}
+                    
+                        <tr>
+                            <th>{{ Student_obj.user_id}}</th>
+                            <th>
+                                    <a href="/teacher/studentslist/{{ Student_obj.id }}/studentattendencelist" class="btn btn-primary btn-sm">Update Attendance</a>
+                            </th>
+                            <th>
+                                <form>
+                                    <div class="form-group"><button class="btn btn-danger btn-sm" type="submit">Delete</button></div>
+                                </form>
+                            </th>
+                            <th></th>
+                        </tr>
+                    {% endfor %}     
+                    </tfoot>
+                </table>
+            </div>
+            <div class="form-group text-center">
+                <a href="/teacher/addstudent" class="btn btn-success btn-sm">Add Student</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+       
+{% endblock content %}
+           
